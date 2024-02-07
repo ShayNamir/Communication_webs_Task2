@@ -157,7 +157,7 @@ def client_handler(client_socket: socket.socket, client_address: tuple[str, int]
                 print(
                     f"{client_prefix} Sending response of length {len(response)} bytes")
 
-                # Send the response back to the client
+                # Send the response back to the clientt
 
                 # * Fill in start (4)
                 client_socket.send(response)# Send the response to the client socket
