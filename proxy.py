@@ -85,6 +85,9 @@ def proxy(proxy_address: tuple[str, int], server_adress: tuple[str, int]) -> Non
 
         # Prepare the proxy socket
         # * Fill in start (1)
+        proxy_socket.bind(proxy_address)# Bind the proxy socket to the address
+        proxy_socket.listen()# Listen for connections
+
         # * Fill in end (1)
 
         threads = []
@@ -94,8 +97,9 @@ def proxy(proxy_address: tuple[str, int], server_adress: tuple[str, int]) -> Non
             try:
                 # Establish connection with client.
                 
-                client_socket, client_address = # * Fill in start (2) # * Fill in end (2))
-
+                #client_socket, client_address = # * Fill in start (2) # * Fill in end (2
+                client_socket, client_address = proxy_socket.accept() # Accept the connection and get the client socket and address
+                
                 # Create a new thread to handle the client request
                 thread = threading.Thread(target=client_handler, args=(
                     client_socket, client_address, server_adress))
@@ -119,8 +123,9 @@ def client_handler(client_socket: socket.socket, client_address: tuple[str, int]
         while True:
             # Receive data from the client
             
-            data = # * Fill in start (3) # * Fill in end (3)
-            
+            #data = # * Fill in start (3) # * Fill in end (3)
+            data = client_socket.recv(api.BUFFER_SIZE/8) #Receive data from the client: /8 from bit to byte
+
             if not data:
                 break
             try:
@@ -153,7 +158,9 @@ def client_handler(client_socket: socket.socket, client_address: tuple[str, int]
                     f"{client_prefix} Sending response of length {len(response)} bytes")
 
                 # Send the response back to the client
+
                 # * Fill in start (4)
+                client_socket.send(response)# Send the response to the client socket
                 # * Fill in end (4)
                 
             except Exception as e:
