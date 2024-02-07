@@ -94,7 +94,7 @@ def proxy(proxy_address: tuple[str, int], server_adress: tuple[str, int]) -> Non
             try:
                 # Establish connection with client.
                 
-                client_socket, client_address = # * Fill in start (2) # * Fill in end (2)
+                client_socket, client_address = # * Fill in start (2) # * Fill in end (2))
 
                 # Create a new thread to handle the client request
                 thread = threading.Thread(target=client_handler, args=(
